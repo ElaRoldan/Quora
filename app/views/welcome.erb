@@ -1,0 +1,32 @@
+<h1>Bienvenido a Quora! <%= current_user.name %></h1>
+<div id="menu">
+  <a href='/ask/<%=current_user.id %>'>Pregunta algo al mundo!!!</a>
+  <a href='/answer/<%=current_user.id %>'>Responde con tu sabiduria</a>
+</div>
+
+<br>
+<br>
+
+<div id="search">
+  <input type="text" name="search" value="" placeholder="Busca una pregunta">
+  <input type="submit" value="Buscar">
+</div>
+<br>
+<br>
+
+<div id="all_questions" >
+<h4>Mira todas nuestras preguntas</h4>
+<% @all_questions. each do |question| %>
+  <ul>  
+    <li><a href='/question/<%=question.id %>/<%= current_user.id %>'><%=question.question_sentence %></a></li>
+      <ul>
+        <% question.answers.each do |answer| %>
+          <li><p><%=answer.answer_sentence %></p></li>
+        <% end %>
+      </ul>  
+  </ul>
+<% end %>
+</div>
+
+
+<a href='/logout'>logout</a><br>
