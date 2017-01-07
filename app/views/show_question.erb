@@ -1,0 +1,13 @@
+<h1>Bienvenido a Quora! <%= current_user.name %></h1>
+<br>
+<h4><%=@question.question_sentence %><a href='/write_answer/<%=@question.id %>'>Responder</a></h4>
+<% user_for_this_question = User.find(@question.user_id) %>
+<p>Preguntado por: <%=user_for_this_question.name %></p>
+<ul>
+  <% @question.answers.each do |answer| %>
+    <% user_for_this_answer = User.find(answer.user_id) %>
+    <li><p><%=answer.answer_sentence %> <strong> Respondido por: <%=user_for_this_answer.name %> </strong></p></li>
+  <% end %>
+</ul>  
+
+<a href='/welcome'>Regresar</a><br>

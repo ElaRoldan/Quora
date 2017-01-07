@@ -1,0 +1,41 @@
+<h1>Bienvenido a tu perfil! <%= current_user.name %></h1>
+<div id="user_info">
+  <h4>Estos son tu datos<a href='/update_info'>Actualizar info</a><br>  </h4>
+  <p><strong>Email:</strong><%= current_user.email %><p>
+  <p><strong>Empleo:</strong><%= current_user.employment %><p>  
+  <p><strong>Educacion:</strong><%= current_user.education %><p> 
+  <p><strong>Ubicacion:</strong><%= current_user.location %><p>
+  <p><strong>Preguntas que haz hecho:</strong><%=current_user.number_of_questions  %><p> 
+  <p><strong>Respuestas que haz dado:</strong><%=current_user.number_of_answers  %><p> 
+  <p><strong>Haz dado:</strong><%=likes_given_by_user  %>likes<p> 
+  <p><strong>Haz dado:</strong><%=dislkes_given_by_user %> dislikes<p>  
+</div>
+</br>
+<div id="user_questions">
+  <h4>Estos son las preguntas que haz hecho: </h4>
+  <% current_user.questions.each do |question| %>
+  <ul>  
+    <li><a href='/question/<%=question.id %>'><%=question.question_sentence %></a></li>
+  </ul>
+  <% end %>
+</div>
+</br>
+<div id="user_answers">
+  <h4>Estas son las respuestas que haz dado: </h4>
+  <% current_user.answers.each do |answer| %>
+    <% question = Question.find(answer.question_id) %>
+    <ul>  
+      <li><a href='/question/<%=question.id %>'><%=question.question_sentence %></a></li>
+      <ul>
+        <li><p><%=answer.answer_sentence %><strong>Respondido por <%=current_user.name %></strong></p></li>
+        <% question.answers.each do |other_answer| %>
+          <% if answer.id != other_answer.id %>
+            <li><p><%=other_answer.answer_sentence %><strong> Respondido por: <%=User.find(other_answer.user_id).name %> </strong></p></li>
+          <% end %>  
+        <% end %>
+      </ul>  
+  </ul>
+  <% end %>
+</div>  
+
+<a href='/welcome'>Regresar</a><br>

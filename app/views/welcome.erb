@@ -1,7 +1,10 @@
 <h1>Bienvenido a Quora! <%= current_user.name %></h1>
 <div id="menu">
-  <a href='/ask/<%=current_user.id %>'>Pregunta algo al mundo!!!</a>
-  <a href='/answer/<%=current_user.id %>'>Responde con tu sabiduria</a>
+  <a href='/ask'>Pregunta algo al mundo!!!</a>
+  <a href='/answer'>Responde con tu sabiduria</a>
+  <a href='/profile'>Visita tu perfil</a>
+  <a href='/show_users'>Otros usuarios</a>
+
 </div>
 
 <br>
@@ -17,13 +20,33 @@
 <div id="all_questions" >
 <h4>Mira todas nuestras preguntas</h4>
 <% @all_questions. each do |question| %>
-  <ul>  
-    <li><a href='/question/<%=question.id %>/<%= current_user.id %>'><%=question.question_sentence %></a></li>
+  <% likes = 0 %>
+  <% dislikes = 0 %>
+  <ul> 
+    <% votes = QuestionVote.where(question_id: question.id) %>
+    <% votes.each do |vote | %>
+      <% if vote.positive == 1 %>
+        <% likes += 1 %>
+      <% elsif vote.negative == 1 %>
+        <% dislikes += 1 %>
+      <% end %>  
+    <% end %>     
+      <li><a href='/question/<%=question.id %>'><%=question.question_sentence %></a><%=likes %><a href='/like/<%=question.id %>'>Like</a><%=dislikes %></p><a href='/dislike/<%=question.id %>'>Dislikes</a></li>
       <ul>
-        <% question.answers.each do |answer| %>
-          <li><p><%=answer.answer_sentence %></p></li>
-        <% end %>
-      </ul>  
+          <% question.answers.each do |answer| %>
+            <% answer_likes = 0 %>
+            <% answer_dislikes = 0 %>
+            <% answer_votes = AnswerVote.where(answer_id: answer.id) %>
+            <% answer_votes.each do |vote | %>
+              <% if vote.positive == 1 %>
+                <% answer_likes += 1 %>
+              <% elsif vote.negative == 1 %>
+                <% answer_dislikes += 1 %>
+             <% end %>  
+            <% end %>     
+            <li><p><%=answer.answer_sentence %><%= answer_likes %><a href='/like_answer/<%=answer.id %>'>Like</a><%=answer_dislikes %><a href='/dislike_answer/<%=answer.id %>'>Dislike</a></p></li>
+          <% end %>
+        </ul>  
   </ul>
 <% end %>
 </div>

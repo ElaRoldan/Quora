@@ -1,0 +1,12 @@
+<h1>Bienvenido a tu perfil! <%= current_user.name %></h1>
+<h4>Estos son tu datos</h4>
+<form action="/update_profile" method="post">
+  <p>User name:</p><input type="text" name="new_name" value="<%=current_user.name %>">
+  <p>Email:</p><input type="text" name="new_email" value="<%=current_user.email %>">
+  <p>Password:</p><input type="password" name="new_password" value="">
+  <p>Empleo:</p><input type="text" name="new_employment" value="<%=current_user.employment %>">
+  <p>Educación:</p><input type="text" name="new_education" value="<%=current_user.education %>">
+  <p>Ciudad:</p><input type="text" name="new_location" value="<%=current_user.location %>"></br>
+  <input type="submit" value="Actualizar">
+</form> 
+<a href='/welcome'>Regresar sin cambios</a><br> 

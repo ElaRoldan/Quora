@@ -1,0 +1,10 @@
+<h1>Bienvenido a Quora! <%= current_user.name %></h1>
+<br>
+<p><%=@question.question_sentence %><p>
+<form action="/new_answer/<%=@question.id %>" method="post">
+  <textarea name="sentence" rows="4" cols="50"placeholder="Escribe aqui tu respuesta..." >
+  </textarea><br>
+  <input type="submit" value="Responder">
+</form>
+</br>
+<a href='/welcome'>Regresar</a><br>

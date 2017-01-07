@@ -1,6 +1,6 @@
 <h1>Bienvenido a Quora! <%= current_user.name %></h1>
 <br>
-<form action='/create_question/<%=current_user.id %>' method="post">
+<form action='/create_question' method="post">
 Elige el tema: 
 <input type="radio" name="topics" value="Moda">Moda
 <input type="radio" name="topics" value="Cine">Cine<br>  
@@ -12,6 +12,6 @@ Elige el tema:
 <h4>Estas son otras preguntas que haz hecho </h4>
 <% current_user.questions.each do |question| %>
   <ul>  
-    <li><a href='/'><%=question.question_sentence %></a></li>
+    <li><a href='/question/<%=question.id %>'><%=question.question_sentence %></a></li>
   </ul>
 <% end %>

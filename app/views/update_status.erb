@@ -1,0 +1,27 @@
+<h1>Bienvenido a Quora! <%= current_user.name %></h1>
+<% if session[:name_message] %>
+  <p><%= session[:name_message] %></p>
+  <% session[:name_message].clear %>
+<% end %>
+<% if session[:update_message] %>
+  <p><%= session[:update_message] %></p>
+  <% session[:update_message].clear %>
+<% end %>  
+<% if session[:password_message] %>
+  <p><%= session[:password_message] %></p>
+  <% session[:password_message].clear %>
+<% end %>
+<% if session[:employment_message] %>
+  <p><%= session[:employment_message] %></p>
+  <% session[:employment_message].clear %>
+<% end %>
+<% if session[:education_message] %>
+  <p><%= session[:education_message] %></p>
+  <% session[:education_message].clear %>
+<% end %>
+<% if session[:ubication_message] %>
+  <p><%= session[:ubication_message] %></p>
+  <% session[:ubication_message].clear %>
+<% end %>
+
+<a href='/welcome'>Regresar</a><br>

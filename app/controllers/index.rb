@@ -1,5 +1,6 @@
 enable :sessions
 
+#Método get de ruta raíz
 get '/' do
   erb :index
 end
